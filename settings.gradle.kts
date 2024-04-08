@@ -1,7 +1,4 @@
-rootProject.name = "buckpal-kotlin"
+rootProject.name = "buckpal-kotlin-modulith"
 
-include("domain")
-include("application")
+include("buckpal")
 include("main")
-include("adapters-inbound:rest")
-include("adapters-outbound:persistence")

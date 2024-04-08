@@ -20,8 +20,8 @@ dependencies {
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
 
-    implementation(project(":adapters-inbound:rest"))
-    implementation(project(":adapters-outbound:persistence"))
+//    implementation(project(":adapters-inbound:rest"))
+//    implementation(project(":adapters-outbound:persistence"))
 
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.h2database:h2")
@@ -33,8 +33,8 @@ dependencies {
     runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:1.9.23")
     runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.8.0")
 
-    testImplementation(project(":domain"))
-    testImplementation(project(":application"))
+//    testImplementation(project(":domain"))
+//    testImplementation(project(":application"))
 
     testImplementation("io.micronaut:micronaut-http-client")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")

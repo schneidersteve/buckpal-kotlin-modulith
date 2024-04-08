@@ -1,0 +1,32 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.9.23"
+    id "com.netflix.nebula.facet"  version "10.1.5"
+    id "idea"
+}
+
+repositories {
+    mavenCentral()
+}
+
+facets {
+    domain
+//    domainTest
+    domainTest {
+        parentSourceSet = "test"
+    }
+}
+
+dependencies {
+    testImplementation "org.jetbrains.kotlin:kotlin-test"
+    domainTestImplementation sourceSets.domain.output
+}
+
+tasks.named('compileKotlin', KotlinCompilationTask) {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
+        javaParameters = true
+    }
+}
