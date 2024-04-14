@@ -2,12 +2,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.9.23"
-    id("com.google.devtools.ksp") version "1.9.23-1.0.19"
-    id("groovy")
-    id "com.netflix.nebula.facet" version "10.1.5"
+    id "org.jetbrains.kotlin.jvm" version "${kotlinVersion}"
+    id "com.google.devtools.ksp" version "${kspVersion}"
+    id "groovy"
+    id "com.netflix.nebula.facet" version "${facetVersion}"
     id "idea"
-    id("io.micronaut.library") version "4.3.5"
+    id "io.micronaut.library" version "${micronautLibraryVersion}"
 }
 
 micronaut {
@@ -32,9 +32,15 @@ facets {
     inboundRestTest {
         parentSourceSet = "test"
     }
+    outboundPersistence
+    outboundPersistenceTest {
+        parentSourceSet = "test"
+    }
 }
 
 dependencies {
+    ksp("io.micronaut.data:micronaut-data-processor")
+
     testImplementation "org.jetbrains.kotlin:kotlin-test"
     testImplementation "org.spockframework:spock-core"
     testRuntimeOnly "net.bytebuddy:byte-buddy:1.14.13"
@@ -62,6 +68,19 @@ dependencies {
     inboundRestTestRuntimeOnly "io.micronaut:micronaut-jackson-databind"
     inboundRestTestRuntimeOnly "ch.qos.logback:logback-classic"
     inboundRestTestRuntimeOnly "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+
+    outboundPersistenceImplementation sourceSets.domain.output
+    outboundPersistenceImplementation sourceSets.application.output
+    outboundPersistenceImplementation "io.micronaut.data:micronaut-data-r2dbc"
+    outboundPersistenceImplementation "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    outboundPersistenceImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+    outboundPersistenceTestImplementation sourceSets.domain.output
+    outboundPersistenceTestImplementation sourceSets.application.output
+    outboundPersistenceTestImplementation sourceSets.outboundPersistence.output
+    outboundPersistenceTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+    outboundPersistenceTestImplementation "ch.qos.logback:logback-classic"
+    outboundPersistenceTestImplementation "io.micronaut.data:micronaut-data-r2dbc"
+    outboundPersistenceTestImplementation "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
 tasks.named('compileKotlin', KotlinCompilationTask) {
