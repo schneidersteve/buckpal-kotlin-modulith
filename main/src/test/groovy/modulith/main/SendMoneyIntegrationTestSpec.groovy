@@ -1,4 +1,4 @@
-package buckpal.kotlin.main
+package modulith.main
 
 import buckpal.kotlin.application.LoadAccountPort
 import buckpal.kotlin.domain.ar.Account

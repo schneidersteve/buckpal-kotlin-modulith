@@ -1,4 +1,4 @@
-package buckpal.kotlin.main
+package modulith.main
 
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse

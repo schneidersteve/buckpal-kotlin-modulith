@@ -3,8 +3,14 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.9.23"
-    id "com.netflix.nebula.facet"  version "10.1.5"
+    id("groovy")
+    id "com.netflix.nebula.facet" version "10.1.5"
     id "idea"
+    id("io.micronaut.library") version "4.3.5"
+}
+
+micronaut {
+    testRuntime("spock2")
 }
 
 repositories {
@@ -13,15 +19,30 @@ repositories {
 
 facets {
     domain
-//    domainTest
     domainTest {
+        parentSourceSet = "test"
+    }
+    application
+    applicationTest {
         parentSourceSet = "test"
     }
 }
 
 dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test"
+    testImplementation "org.spockframework:spock-core"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+    testRuntimeOnly "net.bytebuddy:byte-buddy:1.14.13"
+    testRuntimeOnly "org.objenesis:objenesis:3.3"
+
     domainTestImplementation sourceSets.domain.output
+
+    applicationImplementation sourceSets.domain.output
+    applicationImplementation "javax.transaction:javax.transaction-api:1.3"
+    applicationImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+    applicationTestImplementation sourceSets.domain.output
+    applicationTestImplementation sourceSets.application.output
+//    applicationTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
 }
 
 tasks.named('compileKotlin', KotlinCompilationTask) {
