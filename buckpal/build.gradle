@@ -43,52 +43,45 @@ dependencies {
 
     testImplementation "org.jetbrains.kotlin:kotlin-test"
     testImplementation "org.spockframework:spock-core"
-    testRuntimeOnly "net.bytebuddy:byte-buddy:1.14.13"
-    testRuntimeOnly "org.objenesis:objenesis:3.3"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutinesVersion}"
+    testRuntimeOnly "net.bytebuddy:byte-buddy:${byteBuddyVersion}"
+    testRuntimeOnly "org.objenesis:objenesis:${objenesisVersion}"
+    testRuntimeOnly "ch.qos.logback:logback-classic"
 
     domainTestImplementation sourceSets.domain.output
 
     applicationImplementation sourceSets.domain.output
-    applicationImplementation "javax.transaction:javax.transaction-api:1.3"
-//    applicationRuntimeOnly "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+    applicationImplementation "javax.transaction:javax.transaction-api:${transactionVersion}"
     applicationTestImplementation sourceSets.domain.output
     applicationTestImplementation sourceSets.application.output
-    applicationTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
 
     inboundRestImplementation sourceSets.domain.output
     inboundRestImplementation sourceSets.application.output
     inboundRestImplementation "io.micronaut:micronaut-http-server-netty"
     inboundRestImplementation "io.micronaut:micronaut-jackson-databind"
-//    inboundRestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
     inboundRestTestImplementation sourceSets.domain.output
     inboundRestTestImplementation sourceSets.application.output
     inboundRestTestImplementation "io.micronaut:micronaut-http-client"
     inboundRestTestRuntimeOnly sourceSets.inboundRest.output
     inboundRestTestRuntimeOnly "io.micronaut:micronaut-http-server-netty"
     inboundRestTestRuntimeOnly "io.micronaut:micronaut-jackson-databind"
-    inboundRestTestRuntimeOnly "ch.qos.logback:logback-classic"
-    inboundRestTestRuntimeOnly "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
 
     outboundPersistenceImplementation sourceSets.domain.output
     outboundPersistenceImplementation sourceSets.application.output
     outboundPersistenceImplementation "io.micronaut.data:micronaut-data-r2dbc"
-    outboundPersistenceImplementation "jakarta.persistence:jakarta.persistence-api:3.1.0"
-    outboundPersistenceImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+    outboundPersistenceImplementation "jakarta.persistence:jakarta.persistence-api:${persistenceVersion}"
+    outboundPersistenceImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutinesVersion}"
     outboundPersistenceTestImplementation sourceSets.domain.output
     outboundPersistenceTestImplementation sourceSets.application.output
     outboundPersistenceTestImplementation sourceSets.outboundPersistence.output
-    outboundPersistenceTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
-    outboundPersistenceTestImplementation "ch.qos.logback:logback-classic"
     outboundPersistenceTestImplementation "io.micronaut.data:micronaut-data-r2dbc"
-    outboundPersistenceTestImplementation "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    outboundPersistenceTestRuntimeOnly "jakarta.persistence:jakarta.persistence-api:${persistenceVersion}"
 }
 
 configurations {
     buckpalJars {
         canBeConsumed = true
         canBeResolved = false
-        // If you want this configuration to share the same dependencies, otherwise omit this line
-//        extendsFrom implementation, runtimeOnly
         extendsFrom domainImplementation, domainRuntimeOnly
         extendsFrom applicationImplementation, applicationRuntimeOnly
         extendsFrom inboundRestImplementation, inboundRestRuntimeOnly
