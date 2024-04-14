@@ -83,6 +83,30 @@ dependencies {
     outboundPersistenceTestImplementation "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
+configurations {
+    buckpalJars {
+        canBeConsumed = true
+        canBeResolved = false
+        // If you want this configuration to share the same dependencies, otherwise omit this line
+//        extendsFrom implementation, runtimeOnly
+        extendsFrom domainImplementation, domainRuntimeOnly
+        extendsFrom applicationImplementation, applicationRuntimeOnly
+        extendsFrom inboundRestImplementation, inboundRestRuntimeOnly
+        extendsFrom outboundPersistenceImplementation, outboundPersistenceRuntimeOnly
+    }
+}
+
+task buckpalJar(type: Jar) {
+    from sourceSets.domain.output
+    from sourceSets.application.output
+    from sourceSets.inboundRest.output
+    from sourceSets.outboundPersistence.output
+}
+
+artifacts {
+    buckpalJars(buckpalJar)
+}
+
 tasks.named('compileKotlin', KotlinCompilationTask) {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_17

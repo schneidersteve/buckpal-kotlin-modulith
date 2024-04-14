@@ -1,9 +1,9 @@
 package modulith.main
 
-import buckpal.kotlin.application.LoadAccountPort
-import buckpal.kotlin.domain.ar.Account
-import buckpal.kotlin.domain.ar.AccountId
-import buckpal.kotlin.domain.vo.Money
+import buckpal.application.LoadAccountPort
+import buckpal.domain.ar.Account
+import buckpal.domain.ar.AccountId
+import buckpal.domain.vo.Money
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus

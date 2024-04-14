@@ -20,6 +20,7 @@ dependencies {
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
 
+    implementation(project(":buckpal", "buckpalJars"))
 //    implementation(project(":adapters-inbound:rest"))
 //    implementation(project(":adapters-outbound:persistence"))
 
@@ -33,6 +34,7 @@ dependencies {
     runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:1.9.23")
     runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.8.0")
 
+    testImplementation(project(":buckpal", "buckpalJars"))
 //    testImplementation(project(":domain"))
 //    testImplementation(project(":application"))
 
