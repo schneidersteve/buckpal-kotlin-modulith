@@ -1,4 +1,4 @@
-package buckpal.application.q
+package buckpal.application.query
 
 import buckpal.application.GetAccountBalanceQuery
 import buckpal.application.LoadAccountPort

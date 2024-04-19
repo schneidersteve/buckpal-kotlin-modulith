@@ -1,6 +1,6 @@
 package buckpal.application
 
-import buckpal.application.q.GetAccountBalanceQueryImpl
+import buckpal.application.query.GetAccountBalanceQueryImpl
 import buckpal.domain.ar.Account
 import buckpal.domain.ar.AccountId
 import buckpal.domain.vo.Money

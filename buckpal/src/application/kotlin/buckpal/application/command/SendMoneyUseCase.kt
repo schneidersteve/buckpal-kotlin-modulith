@@ -1,6 +1,5 @@
-package buckpal.application.c
+package buckpal.application.command
 
-import buckpal.application.*
 import buckpal.application.*
 import buckpal.domain.ar.AccountId
 import buckpal.domain.vo.Money

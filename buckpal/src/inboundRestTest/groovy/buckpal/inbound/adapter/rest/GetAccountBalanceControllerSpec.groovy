@@ -1,7 +1,7 @@
 package buckpal.inbound.adapter.rest
 
 import buckpal.application.GetAccountBalanceQuery
-import buckpal.application.q.GetAccountBalanceQueryImpl
+import buckpal.application.query.GetAccountBalanceQueryImpl
 import buckpal.domain.ar.AccountId
 import buckpal.domain.vo.Money
 import io.micronaut.context.annotation.Replaces

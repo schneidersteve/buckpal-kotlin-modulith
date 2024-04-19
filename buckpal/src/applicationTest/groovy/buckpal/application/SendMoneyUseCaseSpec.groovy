@@ -1,12 +1,8 @@
 package buckpal.application
 
-import buckpal.application.AccountLock
-import buckpal.application.LoadAccountPort
-import buckpal.application.c.MoneyTransferProperties
-import buckpal.application.SendMoneyCommand
-import buckpal.application.SendMoneyUseCase
-import buckpal.application.c.SendMoneyUseCaseImpl
-import buckpal.application.UpdateAccountStatePort
+
+import buckpal.application.command.MoneyTransferProperties
+import buckpal.application.command.SendMoneyUseCaseImpl
 import buckpal.domain.ar.Account
 import buckpal.domain.ar.AccountId
 import buckpal.domain.vo.Money

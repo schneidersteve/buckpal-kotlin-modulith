@@ -2,7 +2,7 @@ package buckpal.inbound.adapter.rest
 
 import buckpal.application.SendMoneyCommand
 import buckpal.application.SendMoneyUseCase
-import buckpal.application.c.SendMoneyUseCaseImpl
+import buckpal.application.command.SendMoneyUseCaseImpl
 import buckpal.domain.ar.AccountId
 import buckpal.domain.vo.Money
 import io.micronaut.context.annotation.Replaces
