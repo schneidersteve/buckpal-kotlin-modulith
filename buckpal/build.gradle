@@ -2,12 +2,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "${kotlinVersion}"
-    id "com.google.devtools.ksp" version "${kspVersion}"
+    alias libs.plugins.jetbrains.kotlin.jvm
+    alias libs.plugins.google.devtools.ksp
     id "groovy"
-    id "com.netflix.nebula.facet" version "${facetVersion}"
+    alias libs.plugins.netflix.nebula.facet
     id "idea"
-    id "io.micronaut.library" version "${micronautLibraryVersion}"
+    alias libs.plugins.micronaut.library
 }
 
 micronaut {
@@ -41,41 +41,41 @@ facets {
 dependencies {
     ksp("io.micronaut.data:micronaut-data-processor")
 
-    testImplementation "org.jetbrains.kotlin:kotlin-test"
-    testImplementation "org.spockframework:spock-core"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutinesVersion}"
-    testRuntimeOnly "net.bytebuddy:byte-buddy:${byteBuddyVersion}"
-    testRuntimeOnly "org.objenesis:objenesis:${objenesisVersion}"
-    testRuntimeOnly "ch.qos.logback:logback-classic"
+    testImplementation libs.kotlin.test
+    testImplementation libs.spock.core
+    testImplementation libs.kotlinx.coroutines.core
+    testRuntimeOnly libs.byte.buddy
+    testRuntimeOnly libs.objenesis
+    testRuntimeOnly libs.logback.classic
 
     domainTestImplementation sourceSets.domain.output
 
     applicationImplementation sourceSets.domain.output
-    applicationImplementation "javax.transaction:javax.transaction-api:${transactionVersion}"
+    applicationImplementation libs.javax.transaction.api
     applicationTestImplementation sourceSets.domain.output
     applicationTestImplementation sourceSets.application.output
 
     inboundRestImplementation sourceSets.domain.output
     inboundRestImplementation sourceSets.application.output
-    inboundRestImplementation "io.micronaut:micronaut-http-server-netty"
-    inboundRestImplementation "io.micronaut:micronaut-jackson-databind"
+    inboundRestImplementation libs.micronaut.http.server.netty
+    inboundRestImplementation libs.micronaut.jackson.databind
     inboundRestTestImplementation sourceSets.domain.output
     inboundRestTestImplementation sourceSets.application.output
-    inboundRestTestImplementation "io.micronaut:micronaut-http-client"
+    inboundRestTestImplementation libs.micronaut.http.client
     inboundRestTestRuntimeOnly sourceSets.inboundRest.output
-    inboundRestTestRuntimeOnly "io.micronaut:micronaut-http-server-netty"
-    inboundRestTestRuntimeOnly "io.micronaut:micronaut-jackson-databind"
+    inboundRestTestRuntimeOnly libs.micronaut.http.server.netty
+    inboundRestTestRuntimeOnly libs.micronaut.jackson.databind
 
     outboundPersistenceImplementation sourceSets.domain.output
     outboundPersistenceImplementation sourceSets.application.output
-    outboundPersistenceImplementation "io.micronaut.data:micronaut-data-r2dbc"
-    outboundPersistenceImplementation "jakarta.persistence:jakarta.persistence-api:${persistenceVersion}"
-    outboundPersistenceImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutinesVersion}"
+    outboundPersistenceImplementation libs.micronaut.data.r2dbc
+    outboundPersistenceImplementation libs.jakarta.persistence.api
+    outboundPersistenceImplementation libs.kotlinx.coroutines.core
     outboundPersistenceTestImplementation sourceSets.domain.output
     outboundPersistenceTestImplementation sourceSets.application.output
     outboundPersistenceTestImplementation sourceSets.outboundPersistence.output
-    outboundPersistenceTestImplementation "io.micronaut.data:micronaut-data-r2dbc"
-    outboundPersistenceTestRuntimeOnly "jakarta.persistence:jakarta.persistence-api:${persistenceVersion}"
+    outboundPersistenceTestImplementation libs.micronaut.data.r2dbc
+    outboundPersistenceTestRuntimeOnly libs.jakarta.persistence.api
 }
 
 configurations {

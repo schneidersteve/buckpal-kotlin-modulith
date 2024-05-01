@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.9.23"
-    id("com.google.devtools.ksp") version "1.9.23-1.0.19"
+    alias(libs.plugins.jetbrains.kotlin.jvm)
+    alias(libs.plugins.google.devtools.ksp)
     id("groovy")
-    id("io.micronaut.application") version "4.3.5"
+    alias(libs.plugins.micronaut.application)
 }
 
 micronaut {
@@ -17,29 +17,25 @@ repositories {
 }
 
 dependencies {
-    implementation("io.micronaut.flyway:micronaut-flyway")
-    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    implementation(libs.micronaut.flyway)
+    implementation(libs.micronaut.jdbc.hikari)
 
     implementation(project(":buckpal", "buckpalJars"))
-//    implementation(project(":adapters-inbound:rest"))
-//    implementation(project(":adapters-outbound:persistence"))
 
-    runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("com.h2database:h2")
-    runtimeOnly("io.r2dbc:r2dbc-h2")
-    runtimeOnly("io.r2dbc:r2dbc-pool")
-    runtimeOnly("org.yaml:snakeyaml")
-    runtimeOnly("io.micronaut.reactor:micronaut-reactor")
-    runtimeOnly("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:1.9.23")
-    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.8.0")
+    runtimeOnly(libs.logback.classic)
+    runtimeOnly(libs.h2)
+    runtimeOnly(libs.r2dbc.h2)
+    runtimeOnly(libs.r2dbc.pool)
+    runtimeOnly(libs.snakeyaml)
+    runtimeOnly(libs.micronaut.reactor)
+    runtimeOnly(libs.micronaut.kotlin.runtime)
+    runtimeOnly(libs.kotlin.reflect)
+    runtimeOnly(libs.kotlinx.coroutines.reactor)
 
     testImplementation(project(":buckpal", "buckpalJars"))
-//    testImplementation(project(":domain"))
-//    testImplementation(project(":application"))
 
-    testImplementation("io.micronaut:micronaut-http-client")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    testImplementation(libs.micronaut.http.client)
+    testImplementation(libs.kotlinx.coroutines.core)
 }
 
 tasks.withType<KotlinCompile> {
