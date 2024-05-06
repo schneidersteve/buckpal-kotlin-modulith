@@ -41,6 +41,6 @@ Feature: Send Money
 
 # Gradle Examples
 
-> ./gradlew test
+> ./gradlew check
 
-> ./gradlew test -t
+> ./gradlew check -t
