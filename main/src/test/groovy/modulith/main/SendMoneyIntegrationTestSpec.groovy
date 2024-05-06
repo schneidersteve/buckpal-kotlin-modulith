@@ -67,10 +67,10 @@ class SendMoneyIntegrationTestSpec extends Specification {
             response.status == HttpStatus.OK
 
         and: "source account balance is correct"
-            sourceAccount.calculateBalance() == initialSourceBalance.minus(money)
+            sourceAccount.calculateBalance() == initialSourceBalance - money
 
         and: "target account balance is correct"
-            targetAccount.calculateBalance() == initialTargetBalance.plus(money)
+            targetAccount.calculateBalance() == initialTargetBalance + money
     }
 
 }

@@ -13,9 +13,9 @@ internal class ActivityWindowTest {
     @Test
     fun calculatesStartTimestamp() {
         val window = ActivityWindow(
-            defaultActivity()!!.withTimestamp(startDate()).build(),
-            defaultActivity()!!.withTimestamp(inBetweenDate()).build(),
-            defaultActivity()!!.withTimestamp(endDate()).build()
+            defaultActivity().withTimestamp(startDate()).build(),
+            defaultActivity().withTimestamp(inBetweenDate()).build(),
+            defaultActivity().withTimestamp(endDate()).build()
         )
         assertEquals(startDate(), window.getStartTimestamp())
     }
@@ -23,9 +23,9 @@ internal class ActivityWindowTest {
     @Test
     fun calculatesEndTimestamp() {
         val window = ActivityWindow(
-            defaultActivity()!!.withTimestamp(startDate()).build(),
-            defaultActivity()!!.withTimestamp(inBetweenDate()).build(),
-            defaultActivity()!!.withTimestamp(endDate()).build()
+            defaultActivity().withTimestamp(startDate()).build(),
+            defaultActivity().withTimestamp(inBetweenDate()).build(),
+            defaultActivity().withTimestamp(endDate()).build()
         )
         assertEquals(endDate(), window.getEndTimestamp())
     }
@@ -35,15 +35,15 @@ internal class ActivityWindowTest {
         val account1 = AccountId(1L)
         val account2 = AccountId(2L)
         val window = ActivityWindow(
-            defaultActivity()!!
+            defaultActivity()
                 .withSourceAccount(account1)
                 .withTargetAccount(account2)
                 .withMoney(Money.of(999)).build(),
-            defaultActivity()!!
+            defaultActivity()
                 .withSourceAccount(account1)
                 .withTargetAccount(account2)
                 .withMoney(Money.of(1)).build(),
-            defaultActivity()!!
+            defaultActivity()
                 .withSourceAccount(account2)
                 .withTargetAccount(account1)
                 .withMoney(Money.of(500)).build()

@@ -25,20 +25,30 @@ class AccountPersistenceAdapter(
         baselineDate: LocalDateTime,
     ): Account {
         val account = accountRepository.findById(accountId.value).orElseThrow { EntityNotFoundException() }
-        logger.debug("findById(id = $accountId) = $account");
+        logger.debug("findById(id = {}) = {}", accountId, account)
 
         val activities =
             activityRepository.findByOwnerAccountIdEqualsAndTimestampGreaterThanEquals(
                 accountId.value,
                 baselineDate
             )
-        logger.debug("findByOwnerAccountIdEqualsAndTimestampGreaterThanEquals(ownerAccountId = $accountId, timestamp = $baselineDate) = ${activities.toList()}");
+        logger.debug(
+            "findByOwnerAccountIdEqualsAndTimestampGreaterThanEquals(ownerAccountId = {}, timestamp = {}) = {}",
+            accountId,
+            baselineDate,
+            activities.toList()
+        )
 
         val withdrawalBalance = activityRepository.getWithdrawalBalanceUntil(accountId.value, baselineDate) ?: 0L
-        logger.debug("getWithdrawalBalanceUntil(accountId = $accountId, until = $baselineDate) = $withdrawalBalance");
+        logger.debug(
+            "getWithdrawalBalanceUntil(accountId = {}, until = {}) = {}",
+            accountId,
+            baselineDate,
+            withdrawalBalance
+        )
 
         val depositBalance = activityRepository.getDepositBalanceUntil(accountId.value, baselineDate) ?: 0L
-        logger.debug("getDepositBalanceUntil(accountId = $accountId, until = $baselineDate) = $depositBalance");
+        logger.debug("getDepositBalanceUntil(accountId = {}, until = {}) = {}", accountId, baselineDate, depositBalance)
 
         return accountMapper.mapToAccount(
             account,
@@ -52,7 +62,7 @@ class AccountPersistenceAdapter(
         account.activityWindow.activities.forEach { activity ->
             if (activity.id == null) {
                 val ae = accountMapper.mapToActivityEntity(activity)
-                logger.debug("save(entity = $ae)");
+                logger.debug("save(entity = {})", ae)
                 activityRepository.save(ae)
             }
         }

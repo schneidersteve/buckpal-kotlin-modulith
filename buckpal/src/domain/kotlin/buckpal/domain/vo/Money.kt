@@ -26,19 +26,19 @@ data class Money(val amount: BigInteger) {
     // Methods
 
     fun isPositiveOrZero(): Boolean {
-        return amount.compareTo(BigInteger.ZERO) >= 0
+        return amount >= BigInteger.ZERO
     }
 
     fun isNegative(): Boolean {
-        return amount.compareTo(BigInteger.ZERO) < 0
+        return amount < BigInteger.ZERO
     }
 
     fun isPositive(): Boolean {
-        return amount.compareTo(BigInteger.ZERO) > 0
+        return amount > BigInteger.ZERO
     }
 
     fun isGreaterThanOrEqualTo(money: Money): Boolean {
-        return amount.compareTo(money.amount) >= 0
+        return amount >= money.amount
     }
 
     fun isGreaterThan(money: Money): Boolean {

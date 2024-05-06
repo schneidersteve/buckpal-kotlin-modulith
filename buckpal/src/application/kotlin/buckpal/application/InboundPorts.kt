@@ -12,7 +12,7 @@ interface SendMoneyUseCase {
 }
 
 // TODO implement reflection free validating
-data class SendMoneyCommand(val sourceAccountId: AccountId, val targetAccountId: AccountId, val money: Money) {}
+data class SendMoneyCommand(val sourceAccountId: AccountId, val targetAccountId: AccountId, val money: Money)
 
 interface GetAccountBalanceQuery {
     fun getAccountBalance(accountId: AccountId): Money

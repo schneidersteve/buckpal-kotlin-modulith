@@ -89,7 +89,7 @@ configurations {
     }
 }
 
-task buckpalJar(type: Jar) {
+tasks.register('buckpalJar', Jar) {
     from sourceSets.domain.output
     from sourceSets.application.output
     from sourceSets.inboundRest.output

@@ -21,11 +21,11 @@ internal class AccountTest {
                 .withBaselineBalance(Money.of(555L))
                 .withActivityWindow(
                     ActivityWindow(
-                        defaultActivity()!!
+                        defaultActivity()
                             .withTargetAccount(accountId)
                             .withMoney(Money.of(999L))
                             .build(),
-                        defaultActivity()!!
+                        defaultActivity()
                             .withTargetAccount(accountId)
                             .withMoney(Money.of(1L))
                             .build()
@@ -44,10 +44,10 @@ internal class AccountTest {
             .withBaselineBalance(Money.of(555L))
             .withActivityWindow(
                 ActivityWindow(
-                    defaultActivity()!!
+                    defaultActivity()
                         .withTargetAccount(accountId)
                         .withMoney(Money.of(999L)).build(),
-                    defaultActivity()!!
+                    defaultActivity()
                         .withTargetAccount(accountId)
                         .withMoney(Money.of(1L)).build()
                 )
@@ -67,10 +67,10 @@ internal class AccountTest {
             .withBaselineBalance(Money.of(555L))
             .withActivityWindow(
                 ActivityWindow(
-                    defaultActivity()!!
+                    defaultActivity()
                         .withTargetAccount(accountId)
                         .withMoney(Money.of(999L)).build(),
-                    defaultActivity()!!
+                    defaultActivity()
                         .withTargetAccount(accountId)
                         .withMoney(Money.of(1L)).build()
                 )
@@ -90,10 +90,10 @@ internal class AccountTest {
             .withBaselineBalance(Money.of(555L))
             .withActivityWindow(
                 ActivityWindow(
-                    defaultActivity()!!
+                    defaultActivity()
                         .withTargetAccount(accountId)
                         .withMoney(Money.of(999L)).build(),
-                    defaultActivity()!!
+                    defaultActivity()
                         .withTargetAccount(accountId)
                         .withMoney(Money.of(1L)).build()
                 )

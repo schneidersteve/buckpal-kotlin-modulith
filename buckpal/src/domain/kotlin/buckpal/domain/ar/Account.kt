@@ -19,7 +19,7 @@ data class AccountId(val value: Long)
  * @property activityWindow The window of latest activities on this account.
  */
 // open for mocking
-open class Account(private val id: AccountId?, val baselineBalance: Money, val activityWindow: ActivityWindow) {
+open class Account(private val id: AccountId?, private val baselineBalance: Money, val activityWindow: ActivityWindow) {
 
     // open for mocking
     open fun getId(): Optional<AccountId> {

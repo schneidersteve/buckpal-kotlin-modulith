@@ -16,7 +16,7 @@ class SendMoneyUseCaseSpec extends Specification {
     UpdateAccountStatePort updateAccountStatePort = Mock()
 
     SendMoneyUseCase sendMoneyUseCase = new SendMoneyUseCaseImpl(loadAccountPort, accountLock,
-            updateAccountStatePort, new MoneyTransferProperties(Money.@Companion.of(Long.MAX_VALUE)));
+            updateAccountStatePort, new MoneyTransferProperties(Money.@Companion.of(Long.MAX_VALUE)))
 
     def "Transaction succeeds"() {
         given: "a source account"
@@ -40,7 +40,7 @@ class SendMoneyUseCaseSpec extends Specification {
             var success = sendMoneyUseCase.sendMoney(command)
 
         then: "send money succeeds"
-            success == true
+            success
 
         and: "source account is locked"
             1 * accountLock.lockAccount(sourceAccountId)
@@ -85,7 +85,7 @@ class SendMoneyUseCaseSpec extends Specification {
             var success = sendMoneyUseCase.sendMoney(command)
 
         then: "send money failed"
-            success == false
+            !success
         and: "source account is locked"
             1 * accountLock.lockAccount(sourceAccountId)
         and: "source account is released"

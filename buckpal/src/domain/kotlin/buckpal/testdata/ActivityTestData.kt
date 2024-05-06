@@ -6,7 +6,7 @@ import buckpal.domain.ar.ActivityId
 import buckpal.domain.vo.Money
 import java.time.LocalDateTime
 
-fun defaultActivity(): ActivityBuilder? {
+fun defaultActivity(): ActivityBuilder {
     return ActivityBuilder()
         .withOwnerAccount(AccountId(42L))
         .withSourceAccount(AccountId(42L))

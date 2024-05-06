@@ -8,8 +8,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 
 @R2dbcRepository(dialect = Dialect.H2)
-interface AccountRepository : CrudRepository<AccountEntity, Long> {
-}
+interface AccountRepository : CrudRepository<AccountEntity, Long>
 
 @MappedEntity
 data class AccountEntity(

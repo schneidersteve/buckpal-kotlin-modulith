@@ -11,7 +11,7 @@ fun defaultAccount(): AccountBuilder {
         .withBaselineBalance(Money.of(999L))
         .withActivityWindow(
             ActivityWindow(
-                defaultActivity()!!.build(), defaultActivity()!!.build()
+                defaultActivity().build(), defaultActivity().build()
             )
         )
 }
