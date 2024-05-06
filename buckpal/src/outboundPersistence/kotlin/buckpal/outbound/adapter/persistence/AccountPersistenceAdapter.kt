@@ -6,7 +6,6 @@ import buckpal.domain.ar.Account
 import buckpal.domain.ar.AccountId
 import jakarta.inject.Singleton
 import jakarta.persistence.EntityNotFoundException
-import kotlinx.coroutines.flow.toList
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.time.LocalDateTime
@@ -21,15 +20,18 @@ class AccountPersistenceAdapter(
 
     private val logger: Logger = LoggerFactory.getLogger(AccountPersistenceAdapter::class.java)
 
-    override suspend fun loadAccount(
+    override fun loadAccount(
         accountId: AccountId,
         baselineDate: LocalDateTime,
     ): Account {
-        val account = accountRepository.findById(accountId.value) ?: throw EntityNotFoundException()
+        val account = accountRepository.findById(accountId.value).orElseThrow { EntityNotFoundException() }
         logger.debug("findById(id = $accountId) = $account");
 
         val activities =
-            activityRepository.findByOwnerAccountIdEqualsAndTimestampGreaterThanEquals(accountId.value, baselineDate)
+            activityRepository.findByOwnerAccountIdEqualsAndTimestampGreaterThanEquals(
+                accountId.value,
+                baselineDate
+            )
         logger.debug("findByOwnerAccountIdEqualsAndTimestampGreaterThanEquals(ownerAccountId = $accountId, timestamp = $baselineDate) = ${activities.toList()}");
 
         val withdrawalBalance = activityRepository.getWithdrawalBalanceUntil(accountId.value, baselineDate) ?: 0L
@@ -40,13 +42,13 @@ class AccountPersistenceAdapter(
 
         return accountMapper.mapToAccount(
             account,
-            activities.toList(),
+            activities,
             withdrawalBalance,
             depositBalance
         )
     }
 
-    override suspend fun updateActivities(account: Account) {
+    override fun updateActivities(account: Account) {
         account.activityWindow.activities.forEach { activity ->
             if (activity.id == null) {
                 val ae = accountMapper.mapToActivityEntity(activity)

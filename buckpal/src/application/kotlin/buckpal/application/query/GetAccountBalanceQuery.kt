@@ -11,7 +11,7 @@ import java.time.LocalDateTime
 class GetAccountBalanceQueryImpl(
     private val loadAccountPort: LoadAccountPort,
 ) : GetAccountBalanceQuery {
-    override suspend fun getAccountBalance(accountId: AccountId): Money {
+    override fun getAccountBalance(accountId: AccountId): Money {
         return loadAccountPort.loadAccount(accountId, LocalDateTime.now()).calculateBalance()
     }
 }

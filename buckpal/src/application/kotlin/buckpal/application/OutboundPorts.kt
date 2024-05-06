@@ -5,7 +5,7 @@ import buckpal.domain.ar.AccountId
 import java.time.LocalDateTime
 
 interface LoadAccountPort {
-    suspend fun loadAccount(accountId: AccountId, baselineDate: LocalDateTime): Account
+    fun loadAccount(accountId: AccountId, baselineDate: LocalDateTime): Account
 }
 
 interface AccountLock {
@@ -14,5 +14,5 @@ interface AccountLock {
 }
 
 interface UpdateAccountStatePort {
-    suspend fun updateActivities(account: Account)
+    fun updateActivities(account: Account)
 }

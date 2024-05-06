@@ -5,10 +5,11 @@ Inspired by https://github.com/thombergs/buckpal
 ## Tech Stack
 
 * [Kotlin](https://kotlinlang.org)
-* [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 * [Spock](https://github.com/spockframework/spock)
 * [Micronaut](https://micronaut.io)
-* [Micronaut Data - R2DBC](https://micronaut-projects.github.io/micronaut-data/latest/guide/#dbc)
+* [JDK 21+](https://www.oracle.com/java/technologies/downloads)
+* [Virtual Threads](https://en.wikipedia.org/wiki/Virtual_thread)
+* [Eclipsestore](https://eclipsestore.io)
 * [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download)
 
 ## Layers and Dependency Inversion
@@ -41,6 +42,10 @@ Feature: Send Money
 
 # Gradle Examples
 
-> ./gradlew test
+> ./gradlew check
 
-> ./gradlew test -t
+> ./gradlew check -i
+
+> ./gradlew cleanTest check -i
+
+> ./gradlew check -t

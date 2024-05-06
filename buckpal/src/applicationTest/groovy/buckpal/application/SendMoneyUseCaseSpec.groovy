@@ -1,13 +1,10 @@
 package buckpal.application
 
-
 import buckpal.application.command.MoneyTransferProperties
 import buckpal.application.command.SendMoneyUseCaseImpl
 import buckpal.domain.ar.Account
 import buckpal.domain.ar.AccountId
 import buckpal.domain.vo.Money
-import kotlin.coroutines.Continuation
-import kotlinx.coroutines.Dispatchers
 import spock.lang.Specification
 
 class SendMoneyUseCaseSpec extends Specification {
@@ -21,24 +18,17 @@ class SendMoneyUseCaseSpec extends Specification {
     SendMoneyUseCase sendMoneyUseCase = new SendMoneyUseCaseImpl(loadAccountPort, accountLock,
             updateAccountStatePort, new MoneyTransferProperties(Money.@Companion.of(Long.MAX_VALUE)));
 
-    // Kotlin suspend function parameter
-    var continuation = Mock(Continuation) {
-        getContext() >> Dispatchers.Default
-    }
-
     def "Transaction succeeds"() {
         given: "a source account"
             Account sourceAccount = Mock()
             var sourceAccountId = new AccountId(41L)
             sourceAccount.getId() >> Optional.of(sourceAccountId)
-            // Kotlin suspend function is extended by one more parameter at compile time
-            loadAccountPort.loadAccount(sourceAccount.getId().get(), _, _) >> sourceAccount
+            loadAccountPort.loadAccount(sourceAccount.getId().get(), _) >> sourceAccount
         and: "a target account"
             Account targetAccount = Mock()
             var targetAccountId = new AccountId(42L)
             targetAccount.getId() >> Optional.of(targetAccountId)
-            // Kotlin suspend function is extended by one more parameter at compile time
-            loadAccountPort.loadAccount(targetAccount.getId().get(), _, _) >> targetAccount
+            loadAccountPort.loadAccount(targetAccount.getId().get(), _) >> targetAccount
         and:
             var money = Money.@Companion.of(500L)
 
@@ -47,8 +37,7 @@ class SendMoneyUseCaseSpec extends Specification {
                     sourceAccount.getId().get(),
                     targetAccount.getId().get(),
                     money)
-            // Kotlin suspend function is extended by one more parameter at compile time
-            var success = sendMoneyUseCase.sendMoney(command, continuation)
+            var success = sendMoneyUseCase.sendMoney(command)
 
         then: "send money succeeds"
             success == true
@@ -68,9 +57,8 @@ class SendMoneyUseCaseSpec extends Specification {
             1 * accountLock.releaseAccount(targetAccountId)
 
         and: "accounts have been updated"
-            // Kotlin suspend function is extended by one more parameter at compile time
-            1 * updateAccountStatePort.updateActivities(sourceAccount, _)
-            1 * updateAccountStatePort.updateActivities(targetAccount, _)
+            1 * updateAccountStatePort.updateActivities(sourceAccount)
+            1 * updateAccountStatePort.updateActivities(targetAccount)
     }
 
     def "Given Withdrawal Fails then Only Source Account Is Locked And Released"() {
@@ -78,14 +66,12 @@ class SendMoneyUseCaseSpec extends Specification {
             Account sourceAccount = Mock()
             var sourceAccountId = new AccountId(41L)
             sourceAccount.getId() >> Optional.of(sourceAccountId)
-            // Kotlin suspend function is extended by one more parameter at compile time
-            loadAccountPort.loadAccount(sourceAccount.getId().get(), _, _) >> sourceAccount
+            loadAccountPort.loadAccount(sourceAccount.getId().get(), _) >> sourceAccount
         and: "a target account"
             Account targetAccount = Mock()
             var targetAccountId = new AccountId(42L)
             targetAccount.getId() >> Optional.of(targetAccountId)
-            // Kotlin suspend function is extended by one more parameter at compile time
-            loadAccountPort.loadAccount(targetAccount.getId().get(), _, _) >> targetAccount
+            loadAccountPort.loadAccount(targetAccount.getId().get(), _) >> targetAccount
         and: "source account withdrawal will fail"
             sourceAccount.withdraw(_, _) >> false
         and: "target account deposit will succeed"
@@ -96,8 +82,7 @@ class SendMoneyUseCaseSpec extends Specification {
                     sourceAccount.getId().get(),
                     targetAccount.getId().get(),
                     Money.@Companion.of(300L))
-            // Kotlin suspend function is extended by one more parameter at compile time
-            var success = sendMoneyUseCase.sendMoney(command, continuation)
+            var success = sendMoneyUseCase.sendMoney(command)
 
         then: "send money failed"
             success == false

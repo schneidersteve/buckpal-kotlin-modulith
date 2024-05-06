@@ -6,8 +6,6 @@ import buckpal.domain.vo.ActivityWindow
 import buckpal.domain.vo.Money
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
-import kotlin.coroutines.Continuation
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowKt
 import spock.lang.Shared
 import spock.lang.Specification
@@ -30,11 +28,6 @@ class AccountPersistenceAdapterSpec extends Specification {
     @Inject
     AccountMapper accountMapper
 
-    // Kotlin suspend function parameter
-    def continuation = Mock(Continuation) {
-        getContext() >> Dispatchers.Default
-    }
-
     def setup() {
         adapterUnderTest = new AccountPersistenceAdapter(accountRepository, activityRepository, accountMapper)
     }
@@ -43,9 +36,8 @@ class AccountPersistenceAdapterSpec extends Specification {
         given:
             var accountId = new AccountId(1L)
             var baselineDate = LocalDateTime.of(2018, 8, 10, 0, 0)
-            // Kotlin suspend function is extended by one more parameter at compile time
-            accountRepository.findById(accountId.value, _) >> new AccountEntity(1L)
-            activityRepository.findByOwnerAccountIdEqualsAndTimestampGreaterThanEquals(accountId.value, baselineDate) >> FlowKt.asFlow([
+            accountRepository.findById(accountId.value) >> Optional.of(new AccountEntity(1L))
+            activityRepository.findByOwnerAccountIdEqualsAndTimestampGreaterThanEquals(accountId.value, baselineDate) >> [
                 new ActivityEntity(
                     5,
                     LocalDateTime.of(2019, 8, 9, 9, 0),
@@ -62,17 +54,13 @@ class AccountPersistenceAdapterSpec extends Specification {
                     1,
                     1000
                 )
-            ])
-            // Kotlin suspend function is extended by one more parameter at compile time
-            activityRepository.getWithdrawalBalanceUntil(accountId.value, baselineDate, _) >> 500L
-            // Kotlin suspend function is extended by one more parameter at compile time
-            activityRepository.getDepositBalanceUntil(accountId.value, baselineDate, _) >> 1000L
+            ]
+            activityRepository.getWithdrawalBalanceUntil(accountId.value, baselineDate) >> 500L
+            activityRepository.getDepositBalanceUntil(accountId.value, baselineDate) >> 1000L
         when:
-            // Kotlin suspend function is extended by one more parameter at compile time
             Account account = adapterUnderTest.loadAccount(
                 accountId,
-                baselineDate,
-                continuation
+                baselineDate
             )
         then:
             account.getActivityWindow().getActivities().size() == 2
@@ -91,9 +79,9 @@ class AccountPersistenceAdapterSpec extends Specification {
                         .build()))
                 .build()
         when:
-            adapterUnderTest.updateActivities(account, continuation)
+            adapterUnderTest.updateActivities(account)
         then:
-            1 * activityRepository.save(_, _)
+            1 * activityRepository.save(_)
     }
 
 }

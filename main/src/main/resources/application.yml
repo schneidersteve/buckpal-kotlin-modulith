@@ -1,6 +1,8 @@
 micronaut:
   application:
     name: buckpal-kotlin
+  server:
+    thread-selection: BLOCKING
 netty:
   default:
     allocator:

@@ -8,12 +8,12 @@ import buckpal.domain.vo.Money
 // ------------------------------
 
 interface SendMoneyUseCase {
-    suspend fun sendMoney(command: SendMoneyCommand): Boolean
+    fun sendMoney(command: SendMoneyCommand): Boolean
 }
 
 // TODO implement reflection free validating
 data class SendMoneyCommand(val sourceAccountId: AccountId, val targetAccountId: AccountId, val money: Money) {}
 
 interface GetAccountBalanceQuery {
-    suspend fun getAccountBalance(accountId: AccountId): Money
+    fun getAccountBalance(accountId: AccountId): Money
 }

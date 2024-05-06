@@ -37,7 +37,7 @@ class SendMoneyIntegrationTestSpec extends Specification {
             var sourceAccountId = new AccountId(1L)
             Account sourceAccount = BuildersKt.runBlocking(
                 EmptyCoroutineContext.INSTANCE,
-                (scope, continuation) -> loadAccountPort.loadAccount(sourceAccountId, LocalDateTime.now(), continuation)
+                (scope, continuation) -> loadAccountPort.loadAccount(sourceAccountId, LocalDateTime.now())
             )
             var initialSourceBalance = sourceAccount.calculateBalance()
 
@@ -45,7 +45,7 @@ class SendMoneyIntegrationTestSpec extends Specification {
             var targetAccountId = new AccountId(2L)
             Account targetAccount = BuildersKt.runBlocking(
                 EmptyCoroutineContext.INSTANCE,
-                (scope, continuation) -> loadAccountPort.loadAccount(targetAccountId, LocalDateTime.now(), continuation)
+                (scope, continuation) -> loadAccountPort.loadAccount(targetAccountId, LocalDateTime.now())
             )
             var initialTargetBalance = targetAccount.calculateBalance()
         and:
@@ -56,11 +56,11 @@ class SendMoneyIntegrationTestSpec extends Specification {
 
             sourceAccount = BuildersKt.runBlocking(
                 EmptyCoroutineContext.INSTANCE,
-                (scope, continuation) -> loadAccountPort.loadAccount(sourceAccountId, LocalDateTime.now(), continuation)
+                (scope, continuation) -> loadAccountPort.loadAccount(sourceAccountId, LocalDateTime.now())
             )
             targetAccount = BuildersKt.runBlocking(
                 EmptyCoroutineContext.INSTANCE,
-                (scope, continuation) -> loadAccountPort.loadAccount(targetAccountId, LocalDateTime.now(), continuation)
+                (scope, continuation) -> loadAccountPort.loadAccount(targetAccountId, LocalDateTime.now())
             )
 
         then: "http status is OK"

@@ -15,7 +15,7 @@ class SendMoneyUseCaseImpl(
     private val updateAccountStatePort: UpdateAccountStatePort,
     private val moneyTransferProperties: MoneyTransferProperties,
 ) : SendMoneyUseCase {
-    override suspend fun sendMoney(command: SendMoneyCommand): Boolean {
+    override fun sendMoney(command: SendMoneyCommand): Boolean {
 
         checkThreshold(command)
 

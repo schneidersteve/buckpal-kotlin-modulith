@@ -4,19 +4,18 @@ import io.micronaut.data.annotation.MappedEntity
 import io.micronaut.data.annotation.Query
 import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.r2dbc.annotation.R2dbcRepository
-import io.micronaut.data.repository.kotlin.CoroutineCrudRepository
+import io.micronaut.data.repository.CrudRepository
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
-import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime
 
 @R2dbcRepository(dialect = Dialect.H2)
-interface ActivityRepository : CoroutineCrudRepository<ActivityEntity, Long> {
+interface ActivityRepository : CrudRepository<ActivityEntity, Long> {
 
     fun findByOwnerAccountIdEqualsAndTimestampGreaterThanEquals(
         ownerAccountId: Long,
         timestamp: LocalDateTime,
-    ): Flow<ActivityEntity>
+    ): List<ActivityEntity>
 
     @Query(
         """
@@ -26,7 +25,7 @@ interface ActivityRepository : CoroutineCrudRepository<ActivityEntity, Long> {
                AND timestamp < :until
         """
     )
-    suspend fun getDepositBalanceUntil(accountId: Long, until: LocalDateTime): Long?
+    fun getDepositBalanceUntil(accountId: Long, until: LocalDateTime): Long?
 
     @Query(
         "SELECT SUM(amount) FROM activity_entity " +
@@ -34,7 +33,7 @@ interface ActivityRepository : CoroutineCrudRepository<ActivityEntity, Long> {
                 "AND owner_account_id = :accountId " +
                 "AND timestamp < :until"
     )
-    suspend fun getWithdrawalBalanceUntil(accountId: Long, until: LocalDateTime): Long?
+    fun getWithdrawalBalanceUntil(accountId: Long, until: LocalDateTime): Long?
 
 }
 

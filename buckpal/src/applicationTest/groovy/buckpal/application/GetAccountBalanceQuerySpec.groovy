@@ -14,19 +14,14 @@ class GetAccountBalanceQuerySpec extends Specification {
 
     GetAccountBalanceQuery getAccountBalanceQuery = new GetAccountBalanceQueryImpl(loadAccountPort)
 
-    // Kotlin suspend function parameter
-    var continuation = Mock(Continuation) {
-        getContext() >> Dispatchers.Default
-    }
-
     def "Succeeds"() {
         given: "a account"
             Account account = Mock()
             var accountId = new AccountId(41L)
-            loadAccountPort.loadAccount(accountId, _, _) >> account
+            loadAccountPort.loadAccount(accountId, _) >> account
 
         when: "balance is queried"
-            var balance = getAccountBalanceQuery.getAccountBalance(accountId, continuation)
+            var balance = getAccountBalanceQuery.getAccountBalance(accountId)
 
         then: "balance is 500"
             balance == Money.@Companion.of(500L)

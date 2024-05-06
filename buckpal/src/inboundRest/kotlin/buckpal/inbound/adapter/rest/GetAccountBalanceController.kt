@@ -6,14 +6,19 @@ import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
+import io.micronaut.scheduling.TaskExecutors.BLOCKING
+import io.micronaut.scheduling.annotation.ExecuteOn
 
 @Controller("/accounts")
+//@ExecuteOn(BLOCKING)
 internal open class GetAccountBalanceController(private val getAccountBalanceQuery: GetAccountBalanceQuery) {
 
     @Get("/{accountId}/balance", produces = [MediaType.TEXT_PLAIN])
-    suspend fun getAccountBalance(
+    fun getAccountBalance(
         @PathVariable("accountId") accountId: Long,
     ): Long {
+        println("Steve1: " + Thread.currentThread().toString())
+
         return getAccountBalanceQuery.getAccountBalance(AccountId(accountId)).amount.toLong()
     }
 

@@ -44,8 +44,8 @@ class SendMoneyControllerSpec extends Specification {
                 new SendMoneyCommand(
                     new AccountId(41L),
                     new AccountId(42L),
-                    Money.@Companion.of(500L)),
-                _)
+                    Money.@Companion.of(500L))
+            )
     }
 
 }

@@ -40,7 +40,7 @@ class GetAccountBalanceControllerSpec extends Specification {
             response.body() == "500"
 
         and:
-            1 * getAccountBalanceQuery.getAccountBalance(new AccountId(41L), _) >> Money.@Companion.of(500L)
+            1 * getAccountBalanceQuery.getAccountBalance(new AccountId(41L)) >> Money.@Companion.of(500L)
 
     }
 
