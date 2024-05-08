@@ -6,7 +6,6 @@ import buckpal.domain.vo.ActivityWindow
 import buckpal.domain.vo.Money
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
-import kotlinx.coroutines.flow.FlowKt
 import spock.lang.Shared
 import spock.lang.Specification
 

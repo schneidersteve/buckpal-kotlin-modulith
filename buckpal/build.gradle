@@ -43,7 +43,6 @@ dependencies {
 
     testImplementation libs.kotlin.test
     testImplementation libs.spock.core
-    testImplementation libs.kotlinx.coroutines.core
     testRuntimeOnly libs.byte.buddy
     testRuntimeOnly libs.objenesis
     testRuntimeOnly libs.logback.classic
@@ -70,7 +69,6 @@ dependencies {
     outboundPersistenceImplementation sourceSets.application.output
     outboundPersistenceImplementation libs.micronaut.data.r2dbc
     outboundPersistenceImplementation libs.jakarta.persistence.api
-    outboundPersistenceImplementation libs.kotlinx.coroutines.core
     outboundPersistenceTestImplementation sourceSets.domain.output
     outboundPersistenceTestImplementation sourceSets.application.output
     outboundPersistenceTestImplementation sourceSets.outboundPersistence.output

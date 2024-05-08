@@ -4,8 +4,6 @@ import buckpal.application.query.GetAccountBalanceQueryImpl
 import buckpal.domain.ar.Account
 import buckpal.domain.ar.AccountId
 import buckpal.domain.vo.Money
-import kotlin.coroutines.Continuation
-import kotlinx.coroutines.Dispatchers
 import spock.lang.Specification
 
 class GetAccountBalanceQuerySpec extends Specification {

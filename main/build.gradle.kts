@@ -29,13 +29,11 @@ dependencies {
     runtimeOnly(libs.snakeyaml)
     runtimeOnly(libs.micronaut.reactor)
     runtimeOnly(libs.micronaut.kotlin.runtime)
-    runtimeOnly(libs.kotlin.reflect)
-    runtimeOnly(libs.kotlinx.coroutines.reactor)
+//    runtimeOnly(libs.kotlin.reflect)
 
     testImplementation(project(":buckpal", "buckpalJars"))
 
     testImplementation(libs.micronaut.http.client)
-    testImplementation(libs.kotlinx.coroutines.core)
 }
 
 tasks.withType<KotlinCompile> {
@@ -44,5 +42,5 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClass.set("buckpal.kotlin.main.MainKt")
+    mainClass.set("modulith.main.MainKt")
 }
