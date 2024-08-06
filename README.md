@@ -9,7 +9,6 @@ Inspired by https://github.com/thombergs/buckpal
 * [Micronaut](https://micronaut.io)
 * [JDK 21+](https://www.oracle.com/java/technologies/downloads)
 * [Virtual Threads](https://en.wikipedia.org/wiki/Virtual_thread)
-* [Eclipsestore](https://eclipsestore.io)
 * [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download)
 
 ## Layers and Dependency Inversion

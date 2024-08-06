@@ -1,6 +1,6 @@
 [versions]
-micronaut-library = "4.3.8"
-micronaut-application = "4.3.8"
+micronaut-library = "4.4.2" # https://plugins.gradle.org/search?term=micronaut
+micronaut-application = "4.4.2" # https://plugins.gradle.org/search?term=micronaut
 jetbrains-kotlin-jvm = "1.9.23"
 google-devtools-ksp = "1.9.23-1.0.20"
 netflix-nebula-facet = "10.1.5"
